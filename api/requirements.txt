@@ -1,0 +1,17 @@
+# Web Framework
+fastapi==0.115.0
+uvicorn[standard]==0.31.0
+
+# Database (PostgreSQL - Asynchronous)
+sqlalchemy==2.0.35
+asyncpg==0.30.0
+greenlet==3.1.1       # SQLAlchemy Async için zorunlu kütüphane
+databases[postgresql]==0.9.0
+
+# Cache & Rate Limiting (Redis)
+redis==5.0.8
+
+# Security & Utilities
+python-multipart==0.0.12
+passlib[bcrypt]==1.7.4
+pydantic-settings==2.5.2
