@@ -3,20 +3,18 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, Asyn
 from sqlalchemy.orm import DeclarativeBase
 from dotenv import load_dotenv
 
-# .env dosyasındaki değişkenleri yükle
+#  şifreleri ve URL'ler gibi hassas verileri kaynak koddan ayırmak için .env dosyasını yüklüyoruz.
 load_dotenv()
 
-# Veritabanı URL'sini al (PostgreSQL 18 bağlantısı için) 
-# Önemli: SQLAlchemy asenkron yapı için 'postgresql+asyncpg://' formatını bekler.
+# PostgreSQL 18 Bağlantı Yapılandırması
 DATABASE_URL = os.getenv("DATABASE_URL")
 if DATABASE_URL and DATABASE_URL.startswith("postgresql://"):
     DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://", 1)
 
-# 1. Engine Oluşturma: Veritabanı ile fiziksel bağlantıyı yönetir.
-# echo=True geliştirme aşamasında SQL sorgularını terminalde görmeni sağlar.
+# 1. ASENKRON MOTOR (Engine): Veritabanı ile fiziksel iletişimi sağlar.
 engine = create_async_engine(DATABASE_URL, echo=True, future=True)
 
-# 2. SessionMaker: Her istek geldiğinde veritabanına yeni bir "oturum" açar.
+# 2. OTURUM FABRİKASI (SessionMaker): Her RADIUS isteği için DB'de yeni bir oturum açar.
 AsyncSessionLocal = async_sessionmaker(
     bind=engine,
     class_=AsyncSession,
@@ -24,11 +22,12 @@ AsyncSessionLocal = async_sessionmaker(
     autoflush=False
 )
 
-# 3. Base Sınıfı: Veritabanı modellerimizin (tabloların) miras alacağı ana sınıf.
+# 3. BASE SINIFI (ORM Temeli): Veritabanındaki tablolarımız (radcheck, radacct vb.) 
+# bu sınıftan miras alarak Python nesnelerine dönüştürülür.
 class Base(DeclarativeBase):
     pass
 
-# 4. Dependency (Bağımlılık): FastAPI endpoint'lerinde veritabanı oturumunu yönetir.
+# 4. DEPENDENCY INJECTION (Bağımlılık Enjeksiyonu)
 async def get_db():
     async with AsyncSessionLocal() as session:
         try:
