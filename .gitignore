@@ -1,5 +1,36 @@
+# Hassas bilgiler ve secret'lar
 .env
+.env.local
+
+# Python - Derlenmiş dosyalar ve önbellek
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Sanal Ortamlar (Virtual Environments) 
+venv/
+.venv/
+env/
+ENV/
+
+# Veritabanı ve Yerel Veriler
+# Veri kalıcılığı yerel volume'lar ile sağlanır, verinin kendisi repoya gitmez
 postgres_data/
+*.db
+*.sqlite3
+
+# IDE / Editör Ayarları
 .vscode/
+.idea/
+*.swp
+*.swo
+
+# İşletim Sistemi Dosyaları
+.DS_Store
+Thumbs.db
+
+# Log dosyaları
+*.log
