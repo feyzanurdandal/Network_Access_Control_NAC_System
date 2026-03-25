@@ -1,6 +1,6 @@
 # Network Access Control (NAC) System with AAA Architecture
 
-Bu proje, staj değerlendirme ödevi kapsamında geliştirilmiş; RADIUS protokolünü kullanarak temel düzeyde çalışan bir **Network Access Control (NAC)** sistemidir[cite: 11]. Sistem; kimlik doğrulama (Authentication), yetkilendirme (Authorization) ve hesap yönetimi (Accounting) süreçlerini merkezi bir **Policy Engine** üzerinden yönetir.
+Bu proje, staj değerlendirme ödevi kapsamında geliştirilmiş; RADIUS protokolünü kullanarak temel düzeyde çalışan bir **Network Access Control (NAC)** sistemidir. Sistem; kimlik doğrulama (Authentication), yetkilendirme (Authorization) ve hesap yönetimi (Accounting) süreçlerini merkezi bir **Policy Engine** üzerinden yönetir.
 
 ## Kullanılan Teknolojiler
 
